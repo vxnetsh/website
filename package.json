@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "framer-motion": "^12.5.0",
+    "next": "15.2.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.2.3"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "typescript": "^5",
@@ -23,5 +24,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.3",
     "@eslint/eslintrc": "^3"
-  }
+  },
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
 }

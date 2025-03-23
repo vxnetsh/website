@@ -9,7 +9,7 @@ const kodeMono = Kode_Mono({
 
 export const metadata: Metadata = {
   title: "vxnet",
-  description: "vxnet official website",
+  description: "vxnet official homepage",
 };
 
 export default function RootLayout({
@@ -19,6 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta name="darkreader-lock" />
       <body
         className={`${kodeMono.variable} antialiased w-screen h-screen`}
       >
