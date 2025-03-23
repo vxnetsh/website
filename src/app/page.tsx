@@ -14,7 +14,7 @@ const members = [
 	{ name: "wiremoney", link: "https://firebombed.icu/" },
 	{ name: "nyx", link: "https://github.com/verticalsync" },
 	{ name: "vmohammad", link: "https://vmohammad.dev/" },
-	{ name: "cyprian", link: "https://ksawier.com/" },
+	{ name: "cyprian", link: "https://privm.net/" },
 	{ name: "ic3", link: "https://ic3.cash/" },
 	{ name: "catchii", link: "https://catchii.cat/" },
 	{ name: "bird", link: "#" },
