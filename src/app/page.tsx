@@ -13,6 +13,7 @@ const members = [
 	{ name: "crxa", link: "https://crxaw.tech/" },
 	{ name: "wiremoney", link: "https://firebombed.icu/" },
 	{ name: "nyx", link: "https://github.com/verticalsync" },
+	{ name: "bhop", link: "https://bhop.rest" },
 	{ name: "vmohammad", link: "https://vmohammad.dev/" },
 	{ name: "cyprian", link: "https://privm.net/" },
 	{ name: "ic3", link: "https://ic3.cash/" },
@@ -21,7 +22,6 @@ const members = [
 	{ name: "external", link: "#" },
 	{ name: "slurpee", link: "#" },
 	{ name: "epik", link: "https://epikest.moe" },
-	{ name: "hex", link: "https://femboy.cat" },
 ];
 
 export default function Home() {
