@@ -47,21 +47,29 @@ body {
   overflow-x: hidden;
 }
 
-  body::before {
-    background: linear-gradient(135deg, 
-      rgba(8, 8, 8, 0.5) 0%, 
-      rgba(18, 18, 18, 0.5) 25%, 
-      rgba(26, 26, 26, 0.5) 50%, 
-      rgba(18, 18, 18, 0.5) 75%, 
-      rgba(8, 8, 8, 0.5) 100%);
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
-  }
+body::before {
+  background: linear-gradient(
+    135deg,
+    rgba(8, 8, 8, 0.5) 0%,
+    rgba(18, 18, 18, 0.5) 25%,
+    rgba(26, 26, 26, 0.5) 50%,
+    rgba(18, 18, 18, 0.5) 75%,
+    rgba(8, 8, 8, 0.5) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
 
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .font-kode {

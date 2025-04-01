@@ -8,10 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-      },
+      colors: {},
       fontFamily: {
-        kode: ['Kode Mono', 'sans-serif'],
+        kode: ["Kode Mono", "sans-serif"],
       },
     },
   },
