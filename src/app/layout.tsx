@@ -18,10 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <meta name="darkreader-lock" />
       <body
-        className={`${kodeMono.variable} antialiased w-screen h-screen`}
+        className={`${kodeMono.variable} antialiased w-screen h-screen bg-background text-foreground`}
       >
         {children}
       </body>
