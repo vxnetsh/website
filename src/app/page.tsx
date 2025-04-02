@@ -48,6 +48,7 @@ const members: ExtendedMember[] = [
         description:
           "A custom Discord App aiming to give you better performance and improvements forked from Vesktop",
         url: "https://github.com/Equicord/Equibop",
+        icon: "https://raw.githubusercontent.com/Equicord/Equibop/main/static/icon.png",
         type: "website",
       },
       {
@@ -55,6 +56,7 @@ const members: ExtendedMember[] = [
         description:
           "A utility-suite for Linux that records and screenshots your files easily and uploads them to a file host if desired",
         url: "https://github.com/refurbishing/vnrez",
+        icon: "https://raw.githubusercontent.com/refurbishing/vnrez/main/assets/logo.png",
         type: "website",
       },
     ],
@@ -148,10 +150,11 @@ const members: ExtendedMember[] = [
     github: "verticalsync",
     projects: [
       {
-        name: "Equibop",
+        name: "Equicord",
         description:
-          "A custom Discord App aiming to give you better performance and improvements forked from Vesktop",
-        url: "https://github.com/Equicord/Equibop",
+          "The other cutest Discord client mod",
+        url: "https://github.com/Equicord/Equicord",
+        icon: "https://raw.githubusercontent.com/Equicord/Equicord/main/browser/icon.png",
         type: "website",
       },
     ],
