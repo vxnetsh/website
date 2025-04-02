@@ -1,22 +1,26 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import type { GitHubStats } from "@/lib/actions";
-import { fetchGitHub } from "@/lib/actions";
-import { members } from "@/lib/config";
-import {
-  Activity,
-  getLanyardData,
-  LanyardData,
-  LanyardWebSocket,
-} from "@/lib/lanyard";
-import type { Member, Project } from "@/types/member";
-import ColorThief from "colorthief";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import ColorThief from "colorthief";
+import { fetchGitHub } from "@/lib/actions";
+import type { GitHubStats } from "@/lib/actions";
+import { Card } from "@/components/ui/card";
+import { members } from "@/lib/config";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import {
+  LanyardWebSocket,
+  getLanyardData,
+  LanyardData,
+  Activity,
+} from "@/lib/lanyard";
+import type { Member, Project } from "@/types/member";
+import dynamic from 'next/dynamic';
+import music from "@/lib/music.json"
+
+const Player = dynamic(() => import('lottie-react'), { ssr: false });
 
 type ExtendedActivity = Activity & {
   application_id?: string;
@@ -42,10 +46,6 @@ const extractSpotifyColor = async (
   } catch {
     return null;
   }
-};
-
-const extractCustomStatus = (activities: ExtendedActivity[]) => {
-  return activities?.find(activity => activity.type === 4) || null;
 };
 
 export default function Home() {
@@ -141,7 +141,7 @@ export default function Home() {
       const progress = Math.min(
         Math.max(
           (now - spotifyData.timestamps.start) /
-            (spotifyData.timestamps.end - spotifyData.timestamps.start),
+          (spotifyData.timestamps.end - spotifyData.timestamps.start),
           0,
         ),
         1,
@@ -212,52 +212,23 @@ export default function Home() {
     );
   };
 
-  const renderCustomStatus = (customStatus: ExtendedActivity) => {
-    return (
-      <motion.div 
-        className="flex items-center gap-1.5 text-sm text-white/60 mt-1"
-        initial={{ opacity: 0, y: -5 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-      >
-        {customStatus.emoji && (
-          customStatus.emoji.id ? (
-            <img
-              src={`https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.${customStatus.emoji.animated ? "gif" : "png"}`}
-              alt={customStatus.emoji.name}
-              className="w-4 h-4 flex-shrink-0"
-            />
-          ) : (
-            <img
-              src={`https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${customStatus.emoji.name.codePointAt(0)?.toString(16)}.svg`}
-              alt={customStatus.emoji.name}
-              className="w-4 h-4 flex-shrink-0"
-            />
-          )
-        )}
-        <span>{customStatus.state}</span>
-      </motion.div>
-    );
-  };
-
   const renderActivities = (activities: ExtendedActivity[]) => {
-    const filteredActivities = activities.filter(activity => activity.type !== 4);
-    
-    if (!filteredActivities.length) return null;
+    if (!activities.length) return null;
 
-    const activity = filteredActivities[currentActivityIndex % filteredActivities.length];
+    const activity = activities[currentActivityIndex % activities.length];
 
     const nextActivity = () => {
-      setCurrentActivityIndex((prev) => (prev + 1) % filteredActivities.length);
+      setCurrentActivityIndex((prev) => (prev + 1) % activities.length);
     };
 
     const prevActivity = () => {
       setCurrentActivityIndex(
-        (prev) => (prev - 1 + filteredActivities.length) % filteredActivities.length,
+        (prev) => (prev - 1 + activities.length) % activities.length,
       );
     };
 
     const isSpotify = activity.name === "Spotify";
+    const isCustomStatus = activity.type === 4;
     const spotifyData = isSpotify && currentMemberData?.discord_data?.spotify;
 
     return (
@@ -275,9 +246,9 @@ export default function Home() {
           }
         }}
       >
-        {filteredActivities.length > 1 && (
+        {activities.length > 1 && (
           <div className="absolute top-1 right-2 text-xs text-white/40">
-            {(currentActivityIndex % filteredActivities.length) + 1}/{filteredActivities.length}
+            {(currentActivityIndex % activities.length) + 1}/{activities.length}
           </div>
         )}
 
@@ -308,7 +279,7 @@ export default function Home() {
         <motion.div
           layout="position"
           className="flex items-center gap-2"
-          key={activity.name + (currentActivityIndex % filteredActivities.length)}
+          key={activity.name + (currentActivityIndex % activities.length)}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
@@ -329,6 +300,26 @@ export default function Home() {
               alt={activity.name}
               className="w-12 h-12 rounded-md flex-shrink-0 object-cover"
             />
+          ) : isCustomStatus && activity.emoji ? (
+            activity.emoji.id ? (
+              <motion.img
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                src={`https://cdn.discordapp.com/emojis/${activity.emoji.id}.${activity.emoji.animated ? "gif" : "png"}`}
+                alt={activity.emoji.name}
+                className="w-6 h-6 flex-shrink-0"
+              />
+            ) : (
+              <motion.img
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                src={`https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${activity.emoji.name.codePointAt(0)?.toString(16)}.svg`}
+                alt={activity.emoji.name}
+                className="w-6 h-6 flex-shrink-0"
+              />
+            )
           ) : null}
           <motion.div
             layout="position"
@@ -338,9 +329,9 @@ export default function Home() {
               layout="position"
               className="text-sm font-medium break-words"
             >
-              {activity.name}
+              {isCustomStatus ? activity.state : activity.name}
             </motion.span>
-            {activity.details && (
+            {!isCustomStatus && activity.details && (
               <motion.span
                 layout="position"
                 initial={{ opacity: 0, y: -5 }}
@@ -351,7 +342,7 @@ export default function Home() {
                 {activity.details}
               </motion.span>
             )}
-            {activity.state && (
+            {!isCustomStatus && activity.state && (
               <motion.span
                 layout="position"
                 initial={{ opacity: 0, y: -5 }}
@@ -365,12 +356,12 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {filteredActivities.length > 1 && (
+        {activities.length > 1 && (
           <div className="flex justify-center mt-1 gap-1">
-            {filteredActivities.map((_, idx) => (
+            {activities.map((_, idx) => (
               <div
                 key={idx}
-                className={`w-1 h-1 rounded-full ${idx === currentActivityIndex % filteredActivities.length ? "bg-white/60" : "bg-white/20"}`}
+                className={`w-1 h-1 rounded-full ${idx === currentActivityIndex % activities.length ? "bg-white/60" : "bg-white/20"}`}
               />
             ))}
           </div>
@@ -482,8 +473,20 @@ export default function Home() {
                             )}
                           </div>
                         )}
-                      <span className="text-base font-medium">
+                      <span className="text-base font-medium flex items-center gap-1.5">
                         {member.name}
+                        {memberData[member.name]?.discord_data?.spotify && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            className="text-white/60"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+                              <path d="M19.952 1.651a.75.75 0 0 1 .298 1.02l-8.5 16.5a.75.75 0 0 1-1.318-.001l-8.5-16.5a.75.75 0 0 1 1.318-.702l7.841 15.237 7.841-15.236a.75.75 0 0 1 1.02-.318Z" />
+                            </svg>
+                          </motion.div>
+                        )}
                       </span>
                     </div>
                   </Card>
@@ -539,7 +542,32 @@ export default function Home() {
                             )}
                           </div>
                         )}
-                      <span className="text-sm">{member.name}</span>
+                      <span className="text-sm flex items-center gap-1.5">
+                        {member.name}
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.5, width: 0, rotate: 0 }}
+                          animate={{
+                            opacity: memberData[member.name]?.discord_data?.spotify ? 1 : 0,
+                            scale: memberData[member.name]?.discord_data?.spotify ? 1 : 0.5,
+                            width: memberData[member.name]?.discord_data?.spotify ? "auto" : 0,
+                          }}
+                          transition={{
+                            duration: 0.3,
+                            ease: "easeInOut"
+                          }}
+                          className="text-white/60 overflow-hidden"
+                        >
+                          <Player
+                            autoplay
+                            loop
+                            animationData={music}
+                            style={{ width: 15, height: 15 }}
+                            rendererSettings={{
+                              preserveAspectRatio: "xMidYMid slice",
+                            }}
+                          />
+                        </motion.div>
+                      </span>
                     </div>
                   </Card>
 
@@ -639,10 +667,6 @@ export default function Home() {
                           {currentMemberData.discord_data.discord_user.username}
                         </span>
                       )}
-                      
-                      {currentMemberData.discord_data?.activities && 
-                       extractCustomStatus(currentMemberData.discord_data.activities) && 
-                       renderCustomStatus(extractCustomStatus(currentMemberData.discord_data.activities)!)}
 
                       {currentMemberData.discord_data?.activities && (
                         <div className="mt-1">
@@ -807,26 +831,25 @@ export default function Home() {
                               {
                                 length: Math.ceil(
                                   (currentMemberData?.projects?.length ?? 0) /
-                                    2,
+                                  2,
                                 ),
                               },
                               (_, i) => (
                                 <motion.button
                                   key={i + 1}
                                   onClick={() => setCurrentPage(i + 1)}
-                                  className={`w-2 h-2 p-2 rounded-full relative transition-colors duration-300 ${
-                                    currentPage === i + 1
-                                      ? "bg-white/60"
-                                      : "bg-white/10 hover:bg-white/20"
-                                  }`}
+                                  className={`w-2 h-2 p-2 rounded-full relative transition-colors duration-300 ${currentPage === i + 1
+                                    ? "bg-white/60"
+                                    : "bg-white/10 hover:bg-white/20"
+                                    }`}
                                   whileHover={{ scale: 1.2 }}
                                   whileTap={{ scale: 0.9 }}
                                   animate={
                                     currentPage === i + 1
                                       ? {
-                                          scale: [1, 1.2, 1],
-                                          transition: { duration: 0.5 },
-                                        }
+                                        scale: [1, 1.2, 1],
+                                        transition: { duration: 0.5 },
+                                      }
                                       : { scale: 1 }
                                   }
                                 >
