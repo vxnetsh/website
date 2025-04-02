@@ -31,7 +31,7 @@ export const members: Member[] = [
       name: "Growpai",
       description: "A custom Growtopia internal client with 10k registered users aiming to make ur life easier. With built in lua exec and more you can make ur own features.",
       url: "https://discord.gg/growpai",
-      icon: "https://cdn.nest.rip/uploads/c8025553-fc6e-41e6-8927-2dedd4f11b2c.png",
+      icon: "https://cdn.nest.rip/uploads/f3f2f8cb-bc70-41da-a4b2-9243feaadb89.png",
       type: "website" as const,
     }],
   },
