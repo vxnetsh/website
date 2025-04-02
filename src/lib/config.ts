@@ -12,14 +12,14 @@ export const members: Member[] = [
         description:
           "A custom Discord App aiming to give you better performance and improvements forked from Vesktop",
         url: "https://github.com/Equicord/Equibop",
-        type: "website",
+        type: "website" as const,
       },
       {
         name: "VNREZ",
         description:
           "A utility-suite for Linux that records and screenshots your files easily and uploads them to a file host if desired",
         url: "https://github.com/refurbishing/vnrez",
-        type: "website",
+        type: "website" as const,
       },
     ],
   },
@@ -27,6 +27,13 @@ export const members: Member[] = [
     name: "arespro",
     link: "#",
     discord_id: "573610301140762664",
+    projects: [{
+      name: "Growpai",
+      description: "A custom Growtopia internal client with 10k registered users aiming to make ur life easier. With built in lua exec and more you can make ur own features.",
+      url: "https://discord.gg/growpai",
+      icon: "https://cdn.nest.rip/uploads/c8025553-fc6e-41e6-8927-2dedd4f11b2c.png",
+      type: "website" as const,
+    }],
   },
   {
     name: "vera",
@@ -51,14 +58,14 @@ export const members: Member[] = [
           "Ectasy was a popular minecraft/forceop backdoor with 13 000 users online from 2020 to 2024.",
         url: "https://youtu.be/MVtue3WOZCo",
         icon: "https://body.sh/assets/projects/ectasy.png",
-        type: "website",
+        type: "website" as const,
       },
       {
         name: "Hera",
         description: "Hera was an injectable client made for minecaft 1.8.9",
         url: "https://youtu.be/R8PfNni_xZk",
         icon: "https://body.sh/assets/projects/hera.png",
-        type: "website",
+        type: "website" as const,
       },
       {
         name: "Stellar Tweaks",
@@ -66,21 +73,21 @@ export const members: Member[] = [
           "Stellar Tweaks is an upcoming free and opensource modification for Lunar Client which allows modding, customizing Lunar Client features and much more",
         url: "https://github.com/StellarTweaks",
         icon: "https://cdn.discordapp.com/icons/1330204720014426122/aa45672764ca374d665fa4a2c291a96e.png?size=128",
-        type: "github",
+        type: "github" as const,
       },
       {
         name: "Turnaround",
         description:
           "Turnaround was a free and opensource solver for Cloudfare's turnstile",
         url: "https://github.com/Body-Alhoha/turnaround",
-        type: "github",
+        type: "github" as const,
       },
       {
         name: "Remake",
         description:
           "Remake is a free and opensource library to modify Java classes at runtime, without the need of any java agent",
         url: "https://github.com/StellarTweaks/Remake",
-        type: "github",
+        type: "github" as const,
       },
     ],
   },
@@ -96,7 +103,7 @@ export const members: Member[] = [
           "Contributor at Heist - A versatile multipurpose bot designed to elevate your Discord server and DMs",
         url: "https://heist.lol",
         icon: "https://raw.githubusercontent.com/csynholic/csyn.me/refs/heads/main/assets/heist.png",
-        type: "website",
+        type: "website" as const,
       },
     ],
   },
@@ -104,6 +111,13 @@ export const members: Member[] = [
     name: "wiremoney",
     link: "https://firebombed.icu/",
     discord_id: "865911778235908168",
+    projects: [{
+      name: "Meth Cloud",
+      icon: "https://cdn.nest.rip/uploads/bebd0c2a-10dc-4020-a030-64939d5fe279.jpg",
+      url: "https://t.me/MethCloudBot",
+      description: "log drops, buy accounts, private hotmail and mixed cloud, etc",
+      type: "website" as const,
+    }],
   },
   {
     name: "nyx",
@@ -112,11 +126,12 @@ export const members: Member[] = [
     github: "verticalsync",
     projects: [
       {
-        name: "Equibop",
+        name: "Equicord",
         description:
-          "A custom Discord App aiming to give you better performance and improvements forked from Vesktop",
-        url: "https://github.com/Equicord/Equibop",
-        type: "website",
+          "A fork of Vencord, with over 300+ plugins.",
+        url: "https://equicord.org",
+        type: "website" as const,
+        icon: "https://equicord.org/icon.svg",
       },
     ],
   },
@@ -132,7 +147,7 @@ export const members: Member[] = [
           "A premium solution for e-mails, image uploading & showing off your digital portfolio.",
         url: "https://emogir.ls",
         icon: "https://cdn.discordapp.com/icons/1342461398390673510/9fe83c2624090277777128505ac1bd53.png",
-        type: "website",
+        type: "website" as const,
       },
       {
         name: "evict.bot",
@@ -140,14 +155,14 @@ export const members: Member[] = [
           "An all-in-one bot that streamlines server management without compromising on aesthetics.",
         url: "https://evict.bot",
         icon: "https://r2.evict.bot/evict-marketing.png",
-        type: "website",
+        type: "website" as const,
       },
       {
         name: "lure.rocks",
         description: "A powerful Discord bot for your community",
         url: "https://lure.rocks",
         icon: "https://m.lure.rocks/no_bg_avatar.png",
-        type: "website",
+        type: "website" as const,
       },
     ],
   },
@@ -168,7 +183,7 @@ export const members: Member[] = [
         description: "nest.rip is your secure place to store files",
         url: "https://nest.rip/",
         icon: "https://nest.rip/logo.png",
-        type: "website",
+        type: "website" as const,
       },
       {
         name: "VOT",
@@ -176,7 +191,14 @@ export const members: Member[] = [
           "The all-in-one Discord bot that brings your server to life with powerful moderation, music, and fun features",
         url: "https://vot.wtf/",
         icon: "https://vot.wtf/vot_transparent.png",
-        type: "website",
+        type: "website" as const,
+      },
+      {
+        name: "NaviThingy",
+        description: "A Navidrome client built with Tauri and Svelte.",
+        url: "https://github.com/vMohammad24/NaviThingy/",
+        icon: "https://raw.githubusercontent.com/vMohammad24/NaviThingy/refs/heads/main/static/logo.svg",
+        type: "website" as const,
       },
     ],
   },
@@ -190,7 +212,7 @@ export const members: Member[] = [
         description: "Privacy Focussed Hosting.",
         url: "https://privm.net/",
         icon: "https://privm.net/assets/core/img/favicon.png",
-        type: "website",
+        type: "website" as const,
       },
     ],
   },
@@ -210,8 +232,15 @@ export const members: Member[] = [
           "A bio page platform where users can create profiles to showcase their links and social media.",
         url: "https://guns.lol/",
         icon: "https://assets.guns.lol/guns_logo_no_background_cropped.png",
-        type: "website",
+        type: "website" as const,
       },
+      {
+        name: "MailHaven",
+        description: "Your privacy matters. That’s why we created MailHaven, a free secure and privacy-respected email service designed for you.",
+        url: "https://mailhaven.su",
+        icon: "https://images.guns.lol/V5dAOHgIrp7E8VWD0zoCCD82iB115shZrjXdASim4tk4r.jpg",
+        type: "website" as const,
+      }
     ],
   },
   {
@@ -229,4 +258,8 @@ export const members: Member[] = [
     link: "https://epikest.moe",
     discord_id: "1103990609171193867",
   },
-];
+].sort((a, b) => {
+  if (a.name === "cortex" || a.name === "arespro") return -1;
+  if (b.name === "cortex" || b.name === "arespro") return 1;
+  return (b.projects?.length || 0) - (a.projects?.length || 0);
+});
