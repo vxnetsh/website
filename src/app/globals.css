@@ -159,3 +159,7 @@ body::before {
     @apply bg-background text-foreground;
   }
 }
+
+*:focus {
+  outline: none; /* ✌️ pmo shadcn dialog */
+}

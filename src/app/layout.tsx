@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Kode_Mono } from "next/font/google";
 import "./globals.css";
+import { GradientContainer } from "@/components/ui/gContainer";
 
 const kodeMono = Kode_Mono({
   variable: "--font-kode-mono",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body
         className={`${kodeMono.variable} antialiased w-screen h-screen bg-background text-foreground`}
       >
+        <GradientContainer />
         {children}
       </body>
     </html>

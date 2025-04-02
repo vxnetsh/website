@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchGitHubStats } from "@/lib/github";
+import ColorThief from "colorthief";
+import { fetchGitHubStatsBatch } from "@/lib/actions";
+import type { GitHubStats } from "@/lib/actions";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import {
@@ -25,11 +27,14 @@ type Project = {
 
 type ExtendedMember = Member & {
   projects?: Project[];
+  stats?: Stats;
 };
 
 type ExtendedActivity = Activity & {
   application_id?: string;
 };
+
+type Stats = GitHubStats;
 
 const members: ExtendedMember[] = [
   {
@@ -43,14 +48,14 @@ const members: ExtendedMember[] = [
         description:
           "A custom Discord App aiming to give you better performance and improvements forked from Vesktop",
         url: "https://github.com/Equicord/Equibop",
-        type: "github",
+        type: "website",
       },
       {
         name: "VNREZ",
         description:
           "A utility-suite for Linux that records and screenshots your files easily and uploads them to a file host if desired",
         url: "https://github.com/refurbishing/vnrez",
-        type: "github",
+        type: "website",
       },
     ],
   },
@@ -75,12 +80,61 @@ const members: ExtendedMember[] = [
     link: "https://body.sh",
     discord_id: "1260988143423848520",
     github: "Body-Alhoha",
+    projects: [
+      {
+        name: "Ectasy",
+        description:
+          "Ectasy was a popular minecraft/forceop backdoor with 13 000 users online from 2020 to 2024.",
+        url: "https://youtu.be/MVtue3WOZCo",
+        icon: "https://body.sh/assets/projects/ectasy.png",
+        type: "website",
+      },
+      {
+        name: "Hera",
+        description: "Hera was an injectable client made for minecaft 1.8.9",
+        url: "https://youtu.be/R8PfNni_xZk",
+        icon: "https://body.sh/assets/projects/hera.png",
+        type: "website",
+      },
+      {
+        name: "Stellar Tweaks",
+        description:
+          "Stellar Tweaks is an upcoming free and opensource modification for Lunar Client which allows modding, customizing Lunar Client features and much more",
+        url: "https://github.com/StellarTweaks",
+        icon: "https://cdn.discordapp.com/icons/1330204720014426122/aa45672764ca374d665fa4a2c291a96e.png?size=128",
+        type: "github",
+      },
+      {
+        name: "Turnaround",
+        description:
+          "Turnaround was a free and opensource solver for Cloudfare's turnstile",
+        url: "https://github.com/Body-Alhoha/turnaround",
+        type: "github",
+      },
+      {
+        name: "Remake",
+        description:
+          "Remake is a free and opensource library to modify Java classes at runtime, without the need of any java agent",
+        url: "https://github.com/StellarTweaks/Remake",
+        type: "github",
+      },
+    ],
   },
   {
     name: "crxa",
     link: "https://crxaw.tech/",
     discord_id: "920290194886914069",
     github: "sitescript",
+    projects: [
+      {
+        name: "Heist.lol",
+        description:
+          "Contributor at Heist - A versatile multipurpose bot designed to elevate your Discord server and DMs",
+        url: "https://heist.lol",
+        icon: "https://raw.githubusercontent.com/csynholic/csyn.me/refs/heads/main/assets/heist.png",
+        type: "website",
+      },
+    ],
   },
   {
     name: "wiremoney",
@@ -92,6 +146,15 @@ const members: ExtendedMember[] = [
     link: "https://github.com/verticalsync",
     discord_id: "1207087393929171095",
     github: "verticalsync",
+    projects: [
+      {
+        name: "Equibop",
+        description:
+          "A custom Discord App aiming to give you better performance and improvements forked from Vesktop",
+        url: "https://github.com/Equicord/Equibop",
+        type: "website",
+      },
+    ],
   },
   {
     name: "bhop",
@@ -109,7 +172,8 @@ const members: ExtendedMember[] = [
       },
       {
         name: "evict.bot",
-        description: "A Discord bot",
+        description:
+          "An all-in-one bot that streamlines server management without compromising on aesthetics.",
         url: "https://evict.bot",
         icon: "https://r2.evict.bot/evict-marketing.png",
         type: "website",
@@ -134,11 +198,37 @@ const members: ExtendedMember[] = [
     link: "https://vmohammad.dev/",
     discord_id: "921098159348924457",
     github: "vMohammad24",
+    projects: [
+      {
+        name: "nest.rip",
+        description: "nest.rip is your secure place to store files",
+        url: "https://nest.rip/",
+        icon: "https://nest.rip/logo.png",
+        type: "website",
+      },
+      {
+        name: "VOT",
+        description:
+          "The all-in-one Discord bot that brings your server to life with powerful moderation, music, and fun features",
+        url: "https://vot.wtf/",
+        icon: "https://vot.wtf/vot_transparent.png",
+        type: "website",
+      },
+    ],
   },
   {
     name: "cyprian",
     link: "https://privm.net/",
     discord_id: "147823075382001664",
+    projects: [
+      {
+        name: "Privm",
+        description: "Privacy Focussed Hosting.",
+        url: "https://privm.net/",
+        icon: "https://privm.net/assets/core/img/favicon.png",
+        type: "website",
+      },
+    ],
   },
   {
     name: "ic3",
@@ -149,6 +239,16 @@ const members: ExtendedMember[] = [
     name: "catchii",
     link: "https://catchii.cat/",
     discord_id: "1201465397988315158",
+    projects: [
+      {
+        name: "guns.lol",
+        description:
+          "A bio page platform where users can create profiles to showcase their links and social media.",
+        url: "https://guns.lol/",
+        icon: "https://assets.guns.lol/guns_logo_no_background_cropped.png",
+        type: "website",
+      },
+    ],
   },
   {
     name: "bird",
@@ -167,22 +267,36 @@ const members: ExtendedMember[] = [
   },
 ];
 
+const extractSpotifyColor = async (
+  url: string,
+): Promise<[number, number, number] | null> => {
+  try {
+    const img = document.createElement("img");
+    img.crossOrigin = "Anonymous";
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = url;
+    });
+    return new ColorThief().getColor(img);
+  } catch {
+    return null;
+  }
+};
+
 export default function Home() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null),
     [currentPage, setCurrentPage] = useState(1),
     [currentActivityIndex, setCurrentActivityIndex] = useState(0),
+    [dominantColor, setDominantColor] = useState<
+      [number, number, number] | null
+    >(null),
     [memberData, setMemberData] = useState<
       Record<
         string,
         Member & {
           discord_data?: LanyardData | null;
-          stats?: {
-            repos: number;
-            followers: number;
-            contributions: number;
-            avatar_url: string;
-            bio: string | null;
-          } | null;
+          stats?: Stats | null;
           projects?: Project[];
         }
       >
@@ -196,34 +310,32 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const fetchPromises = members.map(async (m) => {
-        const [lanyard, github] = await Promise.all([
-          m.discord_id ? getLanyardData(m.discord_id) : null,
-          m.github ? fetchGitHubStats(m.github) : null,
-        ]);
-        return [
-          m.name,
-          { ...m, discord_data: lanyard, stats: github },
-        ] as const;
-      });
-
-      const results = await Promise.all(fetchPromises);
-      setMemberData(
-        Object.fromEntries(results) as Record<
-          string,
-          Member & {
-            discord_data?: LanyardData | null;
-            stats?: {
-              repos: number;
-              followers: number;
-              contributions: number;
-              avatar_url: string;
-              bio: string | null;
-            } | null;
-            projects?: Project[];
-          }
-        >,
+      const results = await Promise.all(
+        members.map(async (member) => {
+          const lanyard = member.discord_id
+            ? await getLanyardData(member.discord_id)
+            : null;
+          return [member.name, { ...member, discord_data: lanyard }] as const;
+        }),
       );
+
+      const memberDataWithLanyard = Object.fromEntries(results);
+
+      const githubUsers = members.filter((m) => m.github).map((m) => m.github!);
+      if (githubUsers.length > 0) {
+        const stats = await fetchGitHubStatsBatch(githubUsers);
+        githubUsers.forEach((github, index) => {
+          const member = members.find((m) => m.github === github);
+          if (member && stats[index]) {
+            memberDataWithLanyard[member.name] = {
+              ...memberDataWithLanyard[member.name],
+              stats: stats[index],
+            };
+          }
+        });
+      }
+
+      setMemberData(memberDataWithLanyard);
     })();
 
     members.forEach((m) => {
@@ -247,25 +359,41 @@ export default function Home() {
   }, [lanyardSocket]);
 
   useEffect(() => {
-    if (!currentMemberData?.discord_data?.spotify) return;
+    if (!currentMemberData?.discord_data?.spotify?.album_art_url) {
+      setDominantColor(null);
+      return;
+    }
 
     const spotifyData = currentMemberData.discord_data.spotify;
+    const imageId = spotifyData.album_art_url.split("/").pop();
+    if (!imageId) return;
+
+    extractSpotifyColor(`https://i.scdn.co/image/${imageId}`)
+      .then(setDominantColor)
+      .catch(() => setDominantColor(null));
 
     const updateProgress = () => {
       const now = Date.now();
-      const newProgress =
-        (now - spotifyData.timestamps.start) /
-        (spotifyData.timestamps.end - spotifyData.timestamps.start);
-      setSpotifyProgress(Math.min(Math.max(newProgress, 0), 1));
+      const progress = Math.min(
+        Math.max(
+          (now - spotifyData.timestamps.start) /
+            (spotifyData.timestamps.end - spotifyData.timestamps.start),
+          0,
+        ),
+        1,
+      );
+      setSpotifyProgress(progress);
     };
 
     updateProgress();
     const interval = setInterval(updateProgress, 1000);
-
     return () => clearInterval(interval);
   }, [currentMemberData?.discord_data?.spotify]);
 
-  const handleMemberSelect = (member: Member) => setSelectedMember(member);
+  const handleMemberSelect = (member: Member) => {
+    setSelectedMember(member);
+    setCurrentPage(1);
+  };
 
   const getAvatarUrl = (
     member: ExtendedMember & {
@@ -361,15 +489,24 @@ export default function Home() {
 
         {isSpotify && spotifyData && (
           <motion.div
-            className="absolute top-0 left-0 right-0 h-0.5 bg-white/10 overflow-hidden"
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10 overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
             <motion.div
-              className="h-full bg-white/60"
-              style={{ width: `${spotifyProgress * 100}%` }}
-              transition={{ duration: 0.3 }}
+              className="h-full"
+              style={{
+                backgroundColor: dominantColor
+                  ? `rgb(${dominantColor.join(",")})`
+                  : "rgb(255, 255, 255, 0.6)",
+                boxShadow: dominantColor
+                  ? `0 0 10px rgb(${dominantColor.join(",")})`
+                  : "0 0 10px rgba(255, 255, 255, 0.6)",
+              }}
+              initial={{ width: "0%", opacity: 0.6 }}
+              animate={{ width: `${spotifyProgress * 100}%`, opacity: 0.8 }}
+              transition={{ duration: 0.3, ease: "linear" }}
             />
           </motion.div>
         )}
@@ -405,7 +542,7 @@ export default function Home() {
           >
             <motion.span
               layout="position"
-              className="text-sm font-medium truncate"
+              className="text-sm font-medium break-words"
             >
               {activity.name}
             </motion.span>
@@ -415,7 +552,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 0.6, y: 0 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className="text-xs text-white/60 truncate"
+                className="text-xs text-white/60 break-words"
               >
                 {activity.details}
               </motion.span>
@@ -426,7 +563,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 0.6, y: 0 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className="text-xs text-white/60 truncate"
+                className="text-xs text-white/60 break-words"
               >
                 {activity.state?.replace(/;/g, ",")}
               </motion.span>
@@ -450,6 +587,26 @@ export default function Home() {
 
   return (
     <div className="font-kode w-full min-h-screen flex items-center justify-center gradient-bg relative">
+      <motion.div
+        className="absolute top-4 left-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <Link href="https://github.com/vxnetsh/website" target="_blank">
+          <div className="bg-white/10 p-1.5 rounded-full hover:bg-white/20 transition-all duration-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="#a0a0a0"
+            >
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
+        </Link>
+      </motion.div>
       <div className="container mx-auto flex flex-col gap-6 p-6">
         <motion.div
           className="flex-1 flex flex-col items-center justify-center gap-6"
@@ -600,34 +757,6 @@ export default function Home() {
                 </motion.div>
               ))}
             </motion.div>
-
-            <motion.div
-              className="flex justify-center mt-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.3 }}
-            >
-              <Link href="https://github.com/vxnetsh/website" target="_blank">
-                <div className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110 flex items-center gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-white/70"
-                  >
-                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-                    <path d="M9 18c-4.51 2-5-2-7-2" />
-                  </svg>
-                  <span className="text-white/70 text-sm">Source</span>
-                </div>
-              </Link>
-            </motion.div>
           </motion.div>
         </motion.div>
 
@@ -635,7 +764,7 @@ export default function Home() {
           open={!!selectedMember}
           onOpenChange={(open) => !open && setSelectedMember(null)}
         >
-          <DialogContent className="max-w-[90vw] sm:max-w-md">
+          <DialogContent className="max-w-[90vw] sm:max-w-md bg-background">
             <motion.div
               className="flex flex-col"
               initial={{ opacity: 0, y: 10 }}
@@ -738,12 +867,12 @@ export default function Home() {
                         ease: "easeOut",
                       }}
                     >
-                      <Link
-                        href={`https://github.com/${currentMemberData.github}`}
-                        target="_blank"
-                        className="text-sm flex items-center gap-2"
-                      >
-                        <div className="flex items-center gap-1.5 text-white/60 hover:text-white/80 transition-colors duration-300">
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href={`https://github.com/${currentMemberData.github}`}
+                          target="_blank"
+                          className="text-sm flex items-center gap-1.5 text-white/60 hover:text-white/80 transition-colors duration-300"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"
@@ -751,19 +880,41 @@ export default function Home() {
                             height="16"
                             fill="currentColor"
                           >
-                            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
                           </svg>
                           <span>@{currentMemberData.github}</span>
-                        </div>
+                        </Link>
                         <div className="flex gap-2 text-xs">
-                          <span className="bg-white/5 px-2 py-0.5 rounded-full text-white/60">
+                          <Link
+                            href={`https://github.com/${currentMemberData.github}?tab=followers`}
+                            target="_blank"
+                            className="bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded-full text-white/60 transition-colors duration-300"
+                          >
                             {currentMemberData.stats.followers} followers
-                          </span>
-                          <span className="bg-white/5 px-2 py-0.5 rounded-full text-white/60">
+                          </Link>
+                          <Link
+                            href={`https://github.com/${currentMemberData.github}?tab=repositories`}
+                            target="_blank"
+                            className="bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded-full text-white/60 transition-colors duration-300"
+                          >
                             {currentMemberData.stats.repos} repos
-                          </span>
+                          </Link>
+                          {currentMemberData.stats.stars > 4 && (
+                            <div className="bg-white/5 px-2 py-0.5 rounded-full text-white/60 flex items-center gap-1">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 16"
+                                width="12"
+                                height="12"
+                                fill="currentColor"
+                              >
+                                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+                              </svg>
+                              {currentMemberData.stats.stars}
+                            </div>
+                          )}
                         </div>
-                      </Link>
+                      </div>
                     </motion.div>
                   )}
 
@@ -785,8 +936,8 @@ export default function Home() {
                         <h3 className="text-sm font-medium mb-3">Projects</h3>
                         <div className="grid gap-2">
                           {currentMemberData.projects
-                            .slice((currentPage - 1) * 2, currentPage * 2)
-                            .map((project, idx) => (
+                            ?.slice((currentPage - 1) * 2, currentPage * 2)
+                            ?.map((project, idx) => (
                               <motion.div
                                 key={project.name}
                                 initial={{ opacity: 0, y: 10 }}
@@ -843,7 +994,7 @@ export default function Home() {
                               </motion.div>
                             ))}
                         </div>
-                        {currentMemberData.projects.length > 2 && (
+                        {currentMemberData?.projects?.length > 2 && (
                           <motion.div
                             className="flex justify-center gap-2 mt-4"
                             initial={{ opacity: 0 }}
@@ -857,7 +1008,8 @@ export default function Home() {
                             {Array.from(
                               {
                                 length: Math.ceil(
-                                  currentMemberData.projects.length / 2,
+                                  (currentMemberData?.projects?.length ?? 0) /
+                                    2,
                                 ),
                               },
                               (_, i) => (
