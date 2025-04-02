@@ -258,6 +258,35 @@ export const members: Member[] = [
     link: "https://epikest.moe",
     discord_id: "1103990609171193867",
   },
+  {
+    name: "zyqunix",
+    link: "https://fentseller.lol/portfolio",
+    discord_id: "1201415921802170388",
+    github: "zyqunix",
+    projects: [
+      {
+        name: "Picker",
+        description: "An Android app to pick random things. Still in development.",
+        url: "https://github.com/zyqunix/Picker",
+        icon: "https://atums.world/raw/2025-04-02_21:07:18.svg",
+        type: "website" as const,
+      },
+      {
+        name: "Selfbot v2",
+        description: "A Disord.JS v13 selfbot with a lot of commands.",
+        url: "https://github.com/zyqunix/dc-selfbot",
+        icon: "https://atums.world/raw/2025-04-02_21:29:19.png",
+        type: "website" as const,
+      },
+      {
+        name: "Pickaxes",
+        description: "A Minecraft 1.12.2 Forge mod with added pickaxes, armor and more. Still in development.",
+        url: "https://github.com/zyqunix/Pickaxes",
+        icon: "https://atums.world/raw/2025-04-02_21:44:23.png",
+        type: "website" as const,
+      }
+    ],
+  }
 ].sort((a, b) => {
   if (a.name === "cortex" || a.name === "arespro") return -1;
   if (b.name === "cortex" || b.name === "arespro") return 1;
