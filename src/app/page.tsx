@@ -464,12 +464,13 @@ export default function Home() {
     };
 
     const isSpotify = activity.name === "Spotify";
+    const isCustomStatus = activity.type === 4; // Custom Status type
     const spotifyData = isSpotify && currentMemberData?.discord_data?.spotify;
 
     return (
       <motion.div
         layout="position"
-        className="flex flex-col gap-1 bg-white/5 rounded-md p-2 w-full relative overflow-hidden"
+        className="flex flex-col gap-1 bg-white/5 rounded-md p-2 w-full relative overflow-hidden select-none"
         transition={{ duration: 0.3, ease: "easeOut" }}
         onClick={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
@@ -520,22 +521,42 @@ export default function Home() {
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
         >
-          {activity.assets?.large_image ? (
+            {activity.assets?.large_image ? (
             <motion.img
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               src={
-                activity.assets.large_image.startsWith("spotify:")
-                  ? `https://i.scdn.co/image/${activity.assets.large_image.split(":")[1]}`
-                  : activity.assets.large_image.startsWith("mp:external")
-                    ? `https://media.discordapp.net/external/${activity.assets.large_image.split("/")[2]}/${activity.assets.large_image.split("/")[3]}`
-                    : `https://dcdn.dstn.to/app-icons/${activity.application_id}?size=1024`
+              activity.assets.large_image.startsWith("spotify:")
+              ? `https://i.scdn.co/image/${activity.assets.large_image.split(":")[1]}`
+              : activity.assets.large_image.startsWith("mp:external")
+              ? `https://media.discordapp.net/external/${activity.assets.large_image.split("/")[2]}/${activity.assets.large_image.split("/")[3]}`
+              : `https://dcdn.dstn.to/app-icons/${activity.application_id}?size=1024`
               }
               alt={activity.name}
               className="w-12 h-12 rounded-md flex-shrink-0 object-cover"
             />
-          ) : null}
+            ) : isCustomStatus && activity.emoji ? (
+            activity.emoji.id ? (
+              <motion.img
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              src={`https://cdn.discordapp.com/emojis/${activity.emoji.id}.${activity.emoji.animated ? 'gif' : 'png'}`}
+              alt={activity.emoji.name}
+              className="w-6 h-6 flex-shrink-0"
+              />
+            ) : (
+              <motion.img
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              src={`https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${activity.emoji.name.codePointAt(0)?.toString(16)}.svg`}
+              alt={activity.emoji.name}
+              className="w-6 h-6 flex-shrink-0"
+              />
+            )
+            ) : null}
           <motion.div
             layout="position"
             className="flex flex-col min-w-0 flex-1"
@@ -544,9 +565,9 @@ export default function Home() {
               layout="position"
               className="text-sm font-medium break-words"
             >
-              {activity.name}
+              {isCustomStatus ? activity.state : activity.name}
             </motion.span>
-            {activity.details && (
+            {!isCustomStatus && activity.details && (
               <motion.span
                 layout="position"
                 initial={{ opacity: 0, y: -5 }}
@@ -557,7 +578,7 @@ export default function Home() {
                 {activity.details}
               </motion.span>
             )}
-            {activity.state && (
+            {!isCustomStatus && activity.state && (
               <motion.span
                 layout="position"
                 initial={{ opacity: 0, y: -5 }}

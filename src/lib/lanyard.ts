@@ -5,6 +5,11 @@ export interface Activity {
   id: string;
   details?: string;
   created_at: number;
+  emoji?: {
+    id: string;
+    name: string;
+    animated?: boolean;
+  };
   assets?: {
     large_image?: string;
     large_text?: string;
