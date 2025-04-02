@@ -1,22 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import type { GitHubStats } from "@/lib/actions";
+import { fetchGitHub } from "@/lib/actions";
+import { members } from "@/lib/config";
+import {
+  Activity,
+  getLanyardData,
+  LanyardData,
+  LanyardWebSocket,
+} from "@/lib/lanyard";
+import type { Member, Project } from "@/types/member";
+import ColorThief from "colorthief";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import ColorThief from "colorthief";
-import { fetchGitHub } from "@/lib/actions";
-import type { GitHubStats } from "@/lib/actions";
-import { Card } from "@/components/ui/card";
-import { members } from "@/lib/config";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import {
-  LanyardWebSocket,
-  getLanyardData,
-  LanyardData,
-  Activity,
-} from "@/lib/lanyard";
-import type { Member, Project } from "@/types/member";
+import { useEffect, useState } from "react";
 
 type ExtendedActivity = Activity & {
   application_id?: string;
@@ -42,6 +42,10 @@ const extractSpotifyColor = async (
   } catch {
     return null;
   }
+};
+
+const extractCustomStatus = (activities: ExtendedActivity[]) => {
+  return activities?.find(activity => activity.type === 4) || null;
 };
 
 export default function Home() {
@@ -208,23 +212,52 @@ export default function Home() {
     );
   };
 
-  const renderActivities = (activities: ExtendedActivity[]) => {
-    if (!activities.length) return null;
+  const renderCustomStatus = (customStatus: ExtendedActivity) => {
+    return (
+      <motion.div 
+        className="flex items-center gap-1.5 text-sm text-white/60 mt-1"
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+      >
+        {customStatus.emoji && (
+          customStatus.emoji.id ? (
+            <img
+              src={`https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.${customStatus.emoji.animated ? "gif" : "png"}`}
+              alt={customStatus.emoji.name}
+              className="w-4 h-4 flex-shrink-0"
+            />
+          ) : (
+            <img
+              src={`https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${customStatus.emoji.name.codePointAt(0)?.toString(16)}.svg`}
+              alt={customStatus.emoji.name}
+              className="w-4 h-4 flex-shrink-0"
+            />
+          )
+        )}
+        <span>{customStatus.state}</span>
+      </motion.div>
+    );
+  };
 
-    const activity = activities[currentActivityIndex % activities.length];
+  const renderActivities = (activities: ExtendedActivity[]) => {
+    const filteredActivities = activities.filter(activity => activity.type !== 4);
+    
+    if (!filteredActivities.length) return null;
+
+    const activity = filteredActivities[currentActivityIndex % filteredActivities.length];
 
     const nextActivity = () => {
-      setCurrentActivityIndex((prev) => (prev + 1) % activities.length);
+      setCurrentActivityIndex((prev) => (prev + 1) % filteredActivities.length);
     };
 
     const prevActivity = () => {
       setCurrentActivityIndex(
-        (prev) => (prev - 1 + activities.length) % activities.length,
+        (prev) => (prev - 1 + filteredActivities.length) % filteredActivities.length,
       );
     };
 
     const isSpotify = activity.name === "Spotify";
-    const isCustomStatus = activity.type === 4;
     const spotifyData = isSpotify && currentMemberData?.discord_data?.spotify;
 
     return (
@@ -242,9 +275,9 @@ export default function Home() {
           }
         }}
       >
-        {activities.length > 1 && (
+        {filteredActivities.length > 1 && (
           <div className="absolute top-1 right-2 text-xs text-white/40">
-            {(currentActivityIndex % activities.length) + 1}/{activities.length}
+            {(currentActivityIndex % filteredActivities.length) + 1}/{filteredActivities.length}
           </div>
         )}
 
@@ -275,7 +308,7 @@ export default function Home() {
         <motion.div
           layout="position"
           className="flex items-center gap-2"
-          key={activity.name + (currentActivityIndex % activities.length)}
+          key={activity.name + (currentActivityIndex % filteredActivities.length)}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
@@ -296,26 +329,6 @@ export default function Home() {
               alt={activity.name}
               className="w-12 h-12 rounded-md flex-shrink-0 object-cover"
             />
-          ) : isCustomStatus && activity.emoji ? (
-            activity.emoji.id ? (
-              <motion.img
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                src={`https://cdn.discordapp.com/emojis/${activity.emoji.id}.${activity.emoji.animated ? "gif" : "png"}`}
-                alt={activity.emoji.name}
-                className="w-6 h-6 flex-shrink-0"
-              />
-            ) : (
-              <motion.img
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                src={`https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${activity.emoji.name.codePointAt(0)?.toString(16)}.svg`}
-                alt={activity.emoji.name}
-                className="w-6 h-6 flex-shrink-0"
-              />
-            )
           ) : null}
           <motion.div
             layout="position"
@@ -325,9 +338,9 @@ export default function Home() {
               layout="position"
               className="text-sm font-medium break-words"
             >
-              {isCustomStatus ? activity.state : activity.name}
+              {activity.name}
             </motion.span>
-            {!isCustomStatus && activity.details && (
+            {activity.details && (
               <motion.span
                 layout="position"
                 initial={{ opacity: 0, y: -5 }}
@@ -338,7 +351,7 @@ export default function Home() {
                 {activity.details}
               </motion.span>
             )}
-            {!isCustomStatus && activity.state && (
+            {activity.state && (
               <motion.span
                 layout="position"
                 initial={{ opacity: 0, y: -5 }}
@@ -352,12 +365,12 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {activities.length > 1 && (
+        {filteredActivities.length > 1 && (
           <div className="flex justify-center mt-1 gap-1">
-            {activities.map((_, idx) => (
+            {filteredActivities.map((_, idx) => (
               <div
                 key={idx}
-                className={`w-1 h-1 rounded-full ${idx === currentActivityIndex % activities.length ? "bg-white/60" : "bg-white/20"}`}
+                className={`w-1 h-1 rounded-full ${idx === currentActivityIndex % filteredActivities.length ? "bg-white/60" : "bg-white/20"}`}
               />
             ))}
           </div>
@@ -626,6 +639,10 @@ export default function Home() {
                           {currentMemberData.discord_data.discord_user.username}
                         </span>
                       )}
+                      
+                      {currentMemberData.discord_data?.activities && 
+                       extractCustomStatus(currentMemberData.discord_data.activities) && 
+                       renderCustomStatus(extractCustomStatus(currentMemberData.discord_data.activities)!)}
 
                       {currentMemberData.discord_data?.activities && (
                         <div className="mt-1">
