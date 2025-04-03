@@ -173,36 +173,6 @@ export const members: Member[] = [
     github: "euro-pol",
   },
   {
-    name: "vmohammad",
-    link: "https://vmohammad.dev/",
-    discord_id: "921098159348924457",
-    github: "vMohammad24",
-    projects: [
-      {
-        name: "nest.rip",
-        description: "nest.rip is your secure place to store files",
-        url: "https://nest.rip/",
-        icon: "https://nest.rip/logo.png",
-        type: "website" as const,
-      },
-      {
-        name: "VOT",
-        description:
-          "The all-in-one Discord bot that brings your server to life with powerful moderation, music, and fun features",
-        url: "https://vot.wtf/",
-        icon: "https://vot.wtf/vot_transparent.png",
-        type: "website" as const,
-      },
-      {
-        name: "NaviThingy",
-        description: "A Navidrome client built with Tauri and Svelte.",
-        url: "https://github.com/vMohammad24/NaviThingy/",
-        icon: "https://raw.githubusercontent.com/vMohammad24/NaviThingy/refs/heads/main/static/logo.svg",
-        type: "website" as const,
-      },
-    ],
-  },
-  {
     name: "cyprian",
     link: "https://privm.net/",
     discord_id: "147823075382001664",
