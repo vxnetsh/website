@@ -228,6 +228,11 @@ export const members: Member[] = [
     link: "https://epikest.moe",
     discord_id: "1103990609171193867",
   },
+  {
+    name: "Shintomu",
+    link: "#",
+    discord_id: "1013953531117568051",
+  }
 ].sort((a, b) => {
   if (a.name === "cortex" || a.name === "arespro") return -1;
   if (b.name === "cortex" || b.name === "arespro") return 1;
