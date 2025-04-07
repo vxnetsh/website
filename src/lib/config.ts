@@ -94,7 +94,7 @@ export const members: Member[] = [
   {
     name: "crxa",
     link: "https://crxaw.tech/",
-    discord_id: "920290194886914069",
+    discord_id: "376637472588824587",
     github: "sitescript",
     projects: [
       {
