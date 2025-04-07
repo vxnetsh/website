@@ -12,6 +12,7 @@ export const members: Member[] = [
         description:
           "A custom Discord App aiming to give you better performance and improvements forked from Vesktop",
         url: "https://github.com/Equicord/Equibop",
+        icon: "https://cdn.nest.rip/uploads/631b0748-d276-4f49-ae0d-ced2b7c962c1.svg",
         type: "website" as const,
       },
       {
@@ -19,6 +20,7 @@ export const members: Member[] = [
         description:
           "A utility-suite for Linux that records and screenshots your files easily and uploads them to a file host if desired",
         url: "https://github.com/refurbishing/vnrez",
+        icon: "https://raw.githubusercontent.com/refurbishing/vnrez/main/assets/logo.png",
         type: "website" as const,
       },
     ],
@@ -131,7 +133,7 @@ export const members: Member[] = [
           "A fork of Vencord, with over 300+ plugins.",
         url: "https://equicord.org",
         type: "website" as const,
-        icon: "https://equicord.org/icon.svg",
+        icon: "https://cdn.nest.rip/uploads/631b0748-d276-4f49-ae0d-ced2b7c962c1.svg",
       },
     ],
   },
@@ -161,7 +163,7 @@ export const members: Member[] = [
         name: "lure.rocks",
         description: "A powerful Discord bot for your community",
         url: "https://lure.rocks",
-        icon: "https://m.lure.rocks/no_bg_avatar.png",
+        icon: "https://s3.lure.rocks/no_bg_avatar.png",
         type: "website" as const,
       },
     ],
@@ -208,7 +210,7 @@ export const members: Member[] = [
         name: "MailHaven",
         description: "Your privacy matters. That’s why we created MailHaven, a free secure and privacy-respected email service designed for you.",
         url: "https://mailhaven.su",
-        icon: "https://images.guns.lol/V5dAOHgIrp7E8VWD0zoCCD82iB115shZrjXdASim4tk4r.jpg",
+        icon: "https://cdn.nest.rip/uploads/68dd7dca-4d81-4313-b511-7cd6e4695139.jpg",
         type: "website" as const,
       }
     ],
