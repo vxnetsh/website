@@ -234,6 +234,12 @@ export const members: Member[] = [
     name: "Shintomu",
     link: "#",
     discord_id: "1013953531117568051",
+  },
+  {
+    name: "patho.s",
+    description: "the best new member of vxnet.sh",
+    link: "#",
+    discord_id: "1126202321550975078",
   }
 ].sort((a, b) => {
   if (a.name === "cortex" || a.name === "arespro") return -1;
