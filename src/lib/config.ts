@@ -38,6 +38,22 @@ export const members: Member[] = [
     }],
   },
   {
+    name: "nyx",
+    link: "https://github.com/verticalsync",
+    discord_id: "1207087393929171095",
+    github: "verticalsync",
+    projects: [
+      {
+        name: "Equicord",
+        description:
+          "A fork of Vencord, with over 300+ plugins.",
+        url: "https://equicord.org",
+        type: "website" as const,
+        icon: "https://cdn.nest.rip/uploads/631b0748-d276-4f49-ae0d-ced2b7c962c1.svg",
+      },
+    ],
+  },
+  {
     name: "vera",
     link: "https://t.me/mumri_k",
     discord_id: "1334868066021933130",
@@ -122,33 +138,17 @@ export const members: Member[] = [
     }],
   },
   {
-    name: "nyx",
-    link: "https://github.com/verticalsync",
-    discord_id: "1207087393929171095",
-    github: "verticalsync",
-    projects: [
-      {
-        name: "Equicord",
-        description:
-          "A fork of Vencord, with over 300+ plugins.",
-        url: "https://equicord.org",
-        type: "website" as const,
-        icon: "https://cdn.nest.rip/uploads/631b0748-d276-4f49-ae0d-ced2b7c962c1.svg",
-      },
-    ],
-  },
-  {
     name: "bhop",
     link: "https://bhop.rest",
     github: "prettylittlelies",
     discord_id: "442626774841556992",
     projects: [
       {
-        name: "emogir.ls",
+        name: "Greed",
         description:
-          "A premium solution for e-mails, image uploading & showing off your digital portfolio.",
-        url: "https://emogir.ls",
-        icon: "https://cdn.discordapp.com/icons/1342461398390673510/9fe83c2624090277777128505ac1bd53.png",
+          "The only aesthetic multi-functional Discord bot you need.",
+        url: "https://greed.best",
+        icon: "https://r2.greed.best/greedav.png",
         type: "website" as const,
       },
       {
@@ -163,7 +163,15 @@ export const members: Member[] = [
         name: "lure.rocks",
         description: "A powerful Discord bot for your community",
         url: "https://lure.rocks",
-        icon: "https://s3.lure.rocks/no_bg_avatar.png",
+        icon: "https://s3.lure.rocks/min/no_bg_avatar.png",
+        type: "website" as const,
+      },
+      {
+        name: "emogir.ls",
+        description:
+          "A premium solution for e-mails, image uploading & showing off your digital portfolio.",
+        url: "https://emogir.ls",
+        icon: "https://cdn.discordapp.com/icons/1342461398390673510/9fe83c2624090277777128505ac1bd53.png",
         type: "website" as const,
       },
     ],
@@ -187,11 +195,6 @@ export const members: Member[] = [
         type: "website" as const,
       },
     ],
-  },
-  {
-    name: "ic3",
-    link: "https://ic3.cash/",
-    discord_id: "1181174180578857036",
   },
   {
     name: "catchii",
@@ -226,17 +229,14 @@ export const members: Member[] = [
     discord_id: "1323491828648906855",
   },
   {
-    name: "epik",
-    link: "https://epikest.moe",
-    discord_id: "1103990609171193867",
-  },
-  {
     name: "Shintomu",
     link: "#",
     discord_id: "1013953531117568051",
   }
 ].sort((a, b) => {
-  if (a.name === "cortex" || a.name === "arespro") return -1;
-  if (b.name === "cortex" || b.name === "arespro") return 1;
+  const topOrder = ["arespro", "cortex", "nyx"];
+  if (topOrder.includes(a.name) && topOrder.includes(b.name)) return topOrder.indexOf(a.name) - topOrder.indexOf(b.name);
+  if (topOrder.includes(a.name)) return -1;
+  if (topOrder.includes(b.name)) return 1;
   return (b.projects?.length || 0) - (a.projects?.length || 0);
 });

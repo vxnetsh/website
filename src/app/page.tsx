@@ -435,7 +435,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="flex justify-center items-center gap-1">
-              {members.slice(0, 2).map((member, index) => (
+              {members.slice(0, 3).map((member, index) => (
                 <motion.div
                   key={member.name}
                   initial={{ opacity: 0, y: 20 }}
@@ -491,7 +491,7 @@ export default function Home() {
                     </div>
                   </Card>
 
-                  {index === 0 && (
+                  {index < 2 && (
                     <span className="text-white/20 w-4 text-center">•</span>
                   )}
                 </motion.div>
@@ -504,7 +504,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
             >
-              {members.slice(2).map((member, index) => (
+              {members.slice(3).map((member, index) => (
                 <motion.div
                   key={member.name}
                   initial={{ opacity: 0, y: 15 }}
