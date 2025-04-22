@@ -29,13 +29,6 @@ export const members: Member[] = [
     name: "arespro",
     link: "#",
     discord_id: "573610301140762664",
-    projects: [{
-      name: "Growpai",
-      description: "A custom Growtopia internal client with 10k registered users aiming to make ur life easier. With built in lua exec and more you can make ur own features.",
-      url: "https://discord.gg/growpai",
-      icon: "https://cdn.nest.rip/uploads/f3f2f8cb-bc70-41da-a4b2-9243feaadb89.png",
-      type: "website" as const,
-    }],
   },
   {
     name: "nyx",
@@ -179,8 +172,17 @@ export const members: Member[] = [
   {
     name: "confirmed",
     link: "https://hypixel.lol/",
-    discord_id: "1235921714425106493",
+    discord_id: "657587508837613580", // 1235921714425106493 seconds UserID incase 
     github: "euro-pol",
+    projects: [
+      {
+        name: "Hypixel.lol",
+        description: "Private Mail-solution.",
+        url: "https://hypixel.lol/",
+        icon: "https://hypixel.lol/assets/img/logo.png",
+        type: "website" as const,
+  },
+],
   },
   {
     name: "cyprian",
