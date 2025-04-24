@@ -235,6 +235,12 @@ export const members: Member[] = [
     name: "Shintomu",
     link: "#",
     discord_id: "1013953531117568051",
+  },
+  {
+    name: "vlaz",
+    link: "https://cantresolve.us/",
+    discord_id: "1340596967029346405",
+    github: "salutsalutsalutsalutsalutsalut",
   }
 ].sort((a, b) => {
   const topOrder = ["arespro", "cortex", "nyx"];
