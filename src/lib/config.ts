@@ -241,7 +241,17 @@ export const members: Member[] = [
     link: "https://cantresolve.us/",
     discord_id: "1340596967029346405",
     github: "salutsalutsalutsalutsalutsalut",
-  }
+  },
+  {
+    name: "compile",
+    link: "https://lure.rocks/",
+    discord_id: "659438962624167957",
+  },
+  {
+    name: "drwn",
+    link: "https://selective.lol/",
+    discord_id: "551320403826704385",
+  },
 ].sort((a, b) => {
   const topOrder = ["arespro", "cortex", "nyx"];
   if (topOrder.includes(a.name) && topOrder.includes(b.name)) return topOrder.indexOf(a.name) - topOrder.indexOf(b.name);

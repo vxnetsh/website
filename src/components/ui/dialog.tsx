@@ -69,6 +69,8 @@ function DialogContent({
           }}
           className={cn(
             "fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg sm:max-w-lg",
+            "before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-br before:from-primary/10 before:to-transparent before:opacity-50 before:-z-10",
+            "after:absolute after:inset-0 after:rounded-lg after:bg-gradient-to-tl after:from-primary/10 after:to-transparent after:opacity-50 after:-z-10",
             className,
           )}
           {...(props as HTMLMotionProps<"div">)}

@@ -212,6 +212,63 @@ export default function Home() {
     );
   };
 
+  const renderAvatar = (
+    member: ExtendedMember & {
+      discord_data?: LanyardData | null;
+      stats?: {
+        repos: number;
+        followers: number;
+        contributions: number;
+        avatar_url: string;
+        bio: string | null;
+      } | null;
+    },
+    isLoading?: boolean
+  ) => {
+    if (isLoading) {
+      return (
+        <div className="relative">
+          <div className="w-6 h-6 rounded-full overflow-hidden bg-white/10 animate-pulse" />
+          <div className="absolute -bottom-[2px] -right-[2px] w-2.5 h-2.5 rounded-full border-[2.5px] bg-white/10 animate-pulse" style={{ borderColor: "rgb(35, 35, 35)" }} />
+        </div>
+      );
+    }
+
+    if (member.discord_data?.discord_user.avatar) {
+      return (
+        <div className="relative">
+          <div className="w-6 h-6 rounded-full overflow-hidden">
+            <img
+              src={getAvatarUrl(member) || ""}
+              alt={member.name}
+              width={24}
+              height={24}
+              className="object-cover"
+            />
+          </div>
+          {renderStatusIndicator(member, "sm")}
+        </div>
+      );
+    }
+    if (member.github) {
+      return (
+        <div className="relative">
+          <div className="w-6 h-6 rounded-full overflow-hidden">
+            <img
+              src={member.stats?.avatar_url || `https://github.com/${member.github}.png`}
+              alt={member.name}
+              width={24}
+              height={24}
+              className="object-cover"
+            />
+          </div>
+          {renderStatusIndicator(member, "sm")}
+        </div>
+      );
+    }
+    return null;
+  };
+
   const renderActivities = (activities: ExtendedActivity[]) => {
     if (!activities.length) return null;
 
@@ -394,12 +451,12 @@ export default function Home() {
       </motion.div>
       <div className="container mx-auto flex flex-col gap-6 p-6">
         <motion.div
-          className="flex-1 flex flex-col items-center justify-center gap-6"
+          className="flex-1 flex flex-col items-center justify-center gap-6 w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.div className="flex flex-col items-center justify-center gap-4">
+          <motion.div className="flex flex-col items-center justify-center gap-4 w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -408,6 +465,7 @@ export default function Home() {
                 delay: 0.2,
                 ease: [0.175, 0.885, 0.32, 1.275],
               }}
+              className="flex flex-col items-center justify-center"
             >
               <Image
                 src="/icon.png"
@@ -417,24 +475,24 @@ export default function Home() {
                 height={225}
                 priority
               />
+              <motion.span
+                className="text-3xl font-bold mt-4"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+              >
+                vxnet
+              </motion.span>
             </motion.div>
-            <motion.span
-              className="text-3xl font-bold"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            >
-              vxnet
-            </motion.span>
           </motion.div>
 
           <motion.div
-            className="flex flex-col gap-4 w-full max-w-2xl"
+            className="flex flex-col gap-4 w-full max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="flex justify-center items-center gap-1">
+            <div className="grid grid-cols-3 gap-6 w-full max-w-lg mx-auto">
               {members.slice(0, 3).map((member, index) => (
                 <motion.div
                   key={member.name}
@@ -446,33 +504,16 @@ export default function Home() {
                     ease: "easeOut",
                   }}
                   whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                  className="flex items-center gap-1"
+                  className="flex items-center justify-center"
                 >
                   <Card
-                    className="px-4 py-1 cursor-pointer transition-all hover:bg-white/10 bg-transparent relative"
+                    className="px-5 py-1.5 cursor-pointer transition-all hover:bg-white/10 bg-transparent relative w-full"
                     onClick={() => handleMemberSelect(member)}
                   >
-                    <div className="flex items-center gap-2">
-                      {member.discord_id &&
-                        memberData[member.name]?.discord_data && (
-                          <div className="relative">
-                            <div className="w-6 h-6 rounded-full overflow-hidden">
-                              <img
-                                src={
-                                  getAvatarUrl(memberData[member.name]) || ""
-                                }
-                                alt={member.name}
-                                width={24}
-                                height={24}
-                                className="object-cover"
-                              />
-                            </div>
-                            {renderStatusIndicator(
-                              memberData[member.name],
-                              "sm",
-                            )}
-                          </div>
-                        )}
+                    <div className="flex items-center justify-center gap-2">
+                      {member.discord_id && (
+                        renderAvatar(memberData[member.name], !memberData[member.name]?.discord_data)
+                      )}
                       <span className="text-base font-medium flex items-center gap-1.5">
                         {member.name}
                         {memberData[member.name]?.discord_data?.spotify && (
@@ -482,17 +523,21 @@ export default function Home() {
                             exit={{ opacity: 0, scale: 0.5 }}
                             className="text-white/60"
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-                              <path d="M19.952 1.651a.75.75 0 0 1 .298 1.02l-8.5 16.5a.75.75 0 0 1-1.318-.001l-8.5-16.5a.75.75 0 0 1 1.318-.702l7.841 15.237 7.841-15.236a.75.75 0 0 1 1.02-.318Z" />
+                            <svg 
+                              xmlns="http://www.w3.org/2000/svg" 
+                              viewBox="0 0 24 24" 
+                              fill="currentColor" 
+                              className="w-3.5 h-3.5"
+                            >
+                              <path d="M5.566 4.657A4.505 4.505 0 016.75 4.5h10.5c.41 0 .806.055 1.183.157A3 3 0 0015.75 3h-7.5a3 3 0 00-2.684 1.657zM2.25 12a3 3 0 013-3h13.5a3 3 0 013 3v6a3 3 0 01-3 3H5.25a3 3 0 01-3-3v-6zM5.25 7.5c-.41 0-.806.055-1.184.157A3 3 0 016.75 6h10.5a3 3 0 012.684 1.657A4.505 4.505 0 0018.75 7.5H5.25z"/>
                             </svg>
                           </motion.div>
                         )}
                       </span>
                     </div>
                   </Card>
-
                   {index < 2 && (
-                    <span className="text-white/20 w-4 text-center">•</span>
+                    <span className="text-white/20 text-center mx-2">•</span>
                   )}
                 </motion.div>
               ))}
@@ -521,28 +566,11 @@ export default function Home() {
                     className="grow px-3 py-2 cursor-pointer transition-all hover:bg-white/10 bg-transparent relative"
                     onClick={() => handleMemberSelect(member)}
                   >
-                    <div className="flex justify-center items-center gap-2">
-                      {member.discord_id &&
-                        memberData[member.name]?.discord_data && (
-                          <div className="relative">
-                            <div className="w-6 h-6 rounded-full overflow-hidden">
-                              <img
-                                src={
-                                  getAvatarUrl(memberData[member.name]) || ""
-                                }
-                                alt={member.name}
-                                width={24}
-                                height={24}
-                                className="object-cover"
-                              />
-                            </div>
-                            {renderStatusIndicator(
-                              memberData[member.name],
-                              "sm",
-                            )}
-                          </div>
-                        )}
-                      <span className="text-sm flex items-center gap-1.5">
+                    <div className="flex items-center gap-2 w-full">
+                      {member.discord_id && (
+                        renderAvatar(memberData[member.name], !memberData[member.name]?.discord_data)
+                      )}
+                      <span className="text-sm flex items-center gap-1.5 flex-1 justify-center">
                         {member.name}
                         <motion.div
                           initial={{ opacity: 0, scale: 0.5, width: 0, rotate: 0 }}
