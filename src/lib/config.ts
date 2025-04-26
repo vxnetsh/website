@@ -67,7 +67,7 @@ export const members: Member[] = [
   {
     name: "body",
     link: "https://body.sh",
-    discord_id: "1260988143423848520",
+    discord_id: "1273083391004246080",
     github: "Body-Alhoha",
     projects: [
       {
