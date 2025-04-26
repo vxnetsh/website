@@ -249,7 +249,7 @@ export const members: Member[] = [
   },
   {
     name: "drwn",
-    link: "https://selective.lol/",
+    link: "https://gptowns.me/",
     discord_id: "551320403826704385",
   },
 ].sort((a, b) => {
