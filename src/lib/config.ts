@@ -52,6 +52,13 @@ export const members: Member[] = [
     discord_id: "1334868066021933130",
   },
   {
+    name: "ic3",
+    link: "#",
+    discord_id: "1181174180578857036",
+    github: "ic3",
+    
+  },
+  {
     name: "woosh",
     link: "https://woosh.ing/",
     discord_id: "919239894327521361",
@@ -179,7 +186,7 @@ export const members: Member[] = [
         name: "Hypixel.lol",
         description: "Private Mail-solution.",
         url: "https://hypixel.lol/",
-        icon: "https://hypixel.lol/assets/img/logo.png",
+        icon: "https://cdn.nest.rip/uploads/a293775f-6882-4d92-94c0-aede97aee4ca.png", // fixed up logo by crxa and made one <3
         type: "website" as const,
   },
 ],
@@ -194,7 +201,7 @@ export const members: Member[] = [
         name: "Privm",
         description: "Privacy Focussed Hosting.",
         url: "https://privm.net/",
-        icon: "https://privm.net/assets/core/img/favicon.png",
+        icon: "https://privm.net/assets/core/img/Icon.png",
         type: "website" as const,
       },
     ],
@@ -224,7 +231,7 @@ export const members: Member[] = [
   {
     name: "bird",
     link: "#",
-    discord_id: "1095599396860723210",
+    discord_id: "1250561225733967938", //1095599396860723210 old userid incase of unterminated account
   },
   {
     name: "external",
@@ -237,21 +244,26 @@ export const members: Member[] = [
     discord_id: "1013953531117568051",
   },
   {
-    name: "vlaz",
-    link: "https://cantresolve.us/",
-    discord_id: "1340596967029346405",
-    github: "salutsalutsalutsalutsalutsalut",
-  },
-  {
     name: "compile",
     link: "https://lure.rocks/",
     discord_id: "659438962624167957",
+    projects: [
+      {
+        name: "Lure",
+        description:
+          "A powerful Discord bot for your community, with a focus on performance and reliability.",
+        url: "https://lure.rocks/",
+        icon: "https://s3.lure.rocks/min/no_bg_avatar.png",
+        type: "website" as const,
+      },
+    ],
   },
   {
-    name: "drwn",
-    link: "https://gptowns.me/",
-    discord_id: "551320403826704385",
-  },
+    name: "bean",
+    link: "https://fakecrime.bio/goblin",
+    discord_id: "1131711143237394484",
+  }
+ 
 ].sort((a, b) => {
   const topOrder = ["arespro", "cortex", "nyx"];
   if (topOrder.includes(a.name) && topOrder.includes(b.name)) return topOrder.indexOf(a.name) - topOrder.indexOf(b.name);
