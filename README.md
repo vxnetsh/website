@@ -17,3 +17,8 @@ And to run in dev nextjs dev mode:
 ```
 bun dev
 ```
+// 
+```
+npm run build
+npm start
+```
