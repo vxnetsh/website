@@ -53,7 +53,7 @@ export const members: Member[] = [
   },
   {
     name: "ic3",
-    link: "#",
+    link: "https://ic3.cash/",
     discord_id: "1181174180578857036",
     github: "ic3",
     
