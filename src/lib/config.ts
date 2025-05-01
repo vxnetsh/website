@@ -49,7 +49,7 @@ export const members: Member[] = [
   {
     name: "vera",
     link: "https://t.me/mumri_k",
-    discord_id: "1334868066021933130",
+    discord_id: "1346505857369772085",
   },
   {
     name: "ic3",
