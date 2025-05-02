@@ -28,6 +28,7 @@ export const members: Member[] = [
   {
     name: "arespro",
     link: "#",
+    github: "arespro074",
     discord_id: "573610301140762664",
   },
   {
