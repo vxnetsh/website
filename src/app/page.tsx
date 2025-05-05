@@ -451,12 +451,12 @@ export default function Home() {
       </motion.div>
       <div className="container mx-auto flex flex-col gap-6 p-6">
         <motion.div
-          className="flex-1 flex flex-col items-center justify-center gap-6"
+          className="flex-1 flex flex-col items-center justify-center gap-6 w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.div className="flex flex-col items-center justify-center gap-4">
+          <motion.div className="flex flex-col items-center justify-center gap-4 w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -464,7 +464,8 @@ export default function Home() {
                 duration: 1,
                 delay: 0.2,
                 ease: [0.175, 0.885, 0.32, 1.275],
-              }}              
+              }}
+              className="flex flex-col items-center justify-center"
             >
               <Image
                 src="/icon.png"
@@ -491,7 +492,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="flex justify-center items-center gap-1">
+            <div className="grid grid-cols-3 gap-6 w-full max-w-lg mx-auto">
               {members.slice(0, 3).map((member, index) => (
                 <motion.div
                   key={member.name}
