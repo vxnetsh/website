@@ -185,6 +185,7 @@ export const members: Member[] = [
         name: "PriVM",
         description: "Privacy Focussed Hosting.",
         url: "https://privm.net/",
+        icon: "https://privm.net/storage/logo.webp",
         type: "website" as const,
       },
     ],
