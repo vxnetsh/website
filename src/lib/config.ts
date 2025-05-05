@@ -182,7 +182,7 @@ export const members: Member[] = [
     github: "cypdev",
     projects: [
       {
-        name: "Privm",
+        name: "PriVM",
         description: "Privacy Focussed Hosting.",
         url: "https://privm.net/",
         type: "website" as const,
