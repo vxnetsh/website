@@ -111,22 +111,6 @@ export const members: Member[] = [
     ],
   },
   {
-    name: "crxa",
-    link: "https://crxaw.tech/",
-    discord_id: "376637472588824587",
-    github: "sitescript",
-    projects: [
-      {
-        name: "Heist.lol",
-        description:
-          "Contributor at Heist - A versatile multipurpose bot designed to elevate your Discord server and DMs",
-        url: "https://heist.lol",
-        icon: "https://raw.githubusercontent.com/csynholic/csyn.me/refs/heads/main/assets/heist.png",
-        type: "website" as const,
-      },
-    ],
-  },
-  {
     name: "wiremoney",
     link: "https://firebombed.icu/",
     discord_id: "865911778235908168",
@@ -164,7 +148,7 @@ export const members: Member[] = [
         name: "lure.rocks",
         description: "A powerful Discord bot for your community",
         url: "https://lure.rocks",
-        icon: "https://s3.lure.rocks/min/no_bg_avatar.png",
+        icon: null,
         type: "website" as const,
       },
       {
@@ -202,7 +186,7 @@ export const members: Member[] = [
         name: "Privm",
         description: "Privacy Focussed Hosting.",
         url: "https://privm.net/",
-        icon: "https://privm.net/assets/core/img/Icon.png",
+        icon: null,
         type: "website" as const,
       },
     ],
@@ -254,7 +238,7 @@ export const members: Member[] = [
         description:
           "A powerful Discord bot for your community, with a focus on performance and reliability.",
         url: "https://lure.rocks/",
-        icon: "https://s3.lure.rocks/min/no_bg_avatar.png",
+        icon: null,
         type: "website" as const,
       },
     ],
