@@ -148,7 +148,6 @@ export const members: Member[] = [
         name: "lure.rocks",
         description: "A powerful Discord bot for your community",
         url: "https://lure.rocks",
-        icon: null,
         type: "website" as const,
       },
       {
@@ -186,7 +185,6 @@ export const members: Member[] = [
         name: "Privm",
         description: "Privacy Focussed Hosting.",
         url: "https://privm.net/",
-        icon: null,
         type: "website" as const,
       },
     ],
@@ -224,11 +222,6 @@ export const members: Member[] = [
     discord_id: "1323491828648906855",
   },
   {
-    name: "Shintomu",
-    link: "#",
-    discord_id: "1013953531117568051",
-  },
-  {
     name: "compile",
     link: "https://lure.rocks/",
     discord_id: "659438962624167957",
@@ -238,15 +231,9 @@ export const members: Member[] = [
         description:
           "A powerful Discord bot for your community, with a focus on performance and reliability.",
         url: "https://lure.rocks/",
-        icon: null,
         type: "website" as const,
       },
     ],
-  },
-  {
-    name: "bean",
-    link: "https://fakecrime.bio/goblin",
-    discord_id: "1131711143237394484",
   }
  
 ].sort((a, b) => {
