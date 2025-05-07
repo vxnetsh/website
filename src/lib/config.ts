@@ -245,15 +245,15 @@ export const members: Member[] = [
   },
   {
     name: "compile",
-    link: "https://lure.rocks/",
+    link: "https://tempt.lol",
     discord_id: "659438962624167957",
     projects: [
       {
-        name: "Lure",
+        name: "Tempt",
         description:
           "A powerful Discord bot for your community, with a focus on performance and reliability.",
-        url: "https://lure.rocks/",
-        icon: "https://s3.lure.rocks/min/no_bg_avatar.png",
+        url: "https://tempt.lol",
+        icon: "https://cdn.discordapp.com/avatars/1367774588750266408/a271d4855b63b329567c173cbd3557f9.png?size=1024",
         type: "website" as const,
       },
     ],
