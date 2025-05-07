@@ -28,6 +28,7 @@ export const members: Member[] = [
   {
     name: "arespro",
     link: "#",
+    github: "arespro074",
     discord_id: "573610301140762664",
   },
   {
@@ -110,22 +111,6 @@ export const members: Member[] = [
     ],
   },
   {
-    name: "crxa",
-    link: "https://crxaw.tech/",
-    discord_id: "376637472588824587",
-    github: "sitescript",
-    projects: [
-      {
-        name: "Heist.lol",
-        description:
-          "Contributor at Heist - A versatile multipurpose bot designed to elevate your Discord server and DMs",
-        url: "https://heist.lol",
-        icon: "https://raw.githubusercontent.com/csynholic/csyn.me/refs/heads/main/assets/heist.png",
-        type: "website" as const,
-      },
-    ],
-  },
-  {
     name: "wiremoney",
     link: "https://firebombed.icu/",
     discord_id: "865911778235908168",
@@ -163,7 +148,6 @@ export const members: Member[] = [
         name: "lure.rocks",
         description: "A powerful Discord bot for your community",
         url: "https://lure.rocks",
-        icon: "https://s3.lure.rocks/min/no_bg_avatar.png",
         type: "website" as const,
       },
       {
@@ -198,10 +182,10 @@ export const members: Member[] = [
     github: "cypdev",
     projects: [
       {
-        name: "Privm",
+        name: "PriVM",
         description: "Privacy Focussed Hosting.",
         url: "https://privm.net/",
-        icon: "https://privm.net/assets/core/img/Icon.png",
+        icon: "https://privm.net/storage/logo.webp",
         type: "website" as const,
       },
     ],
@@ -239,11 +223,6 @@ export const members: Member[] = [
     discord_id: "1323491828648906855",
   },
   {
-    name: "Shintomu",
-    link: "#",
-    discord_id: "1013953531117568051",
-  },
-  {
     name: "compile",
     link: "https://tempt.lol",
     discord_id: "659438962624167957",
@@ -257,11 +236,6 @@ export const members: Member[] = [
         type: "website" as const,
       },
     ],
-  },
-  {
-    name: "bean",
-    link: "https://fakecrime.bio/goblin",
-    discord_id: "1131711143237394484",
   }
  
 ].sort((a, b) => {

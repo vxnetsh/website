@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <meta name="darkreader-lock" />
+      <head>
+        <meta name="darkreader-lock" />
+      </head>
       <body
         className={`${kodeMono.variable} antialiased w-screen h-screen bg-background text-foreground`}
       >

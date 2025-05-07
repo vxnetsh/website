@@ -504,7 +504,7 @@ export default function Home() {
                     ease: "easeOut",
                   }}
                   whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                  className="flex items-center justify-center"
+                  className="flex flex-1"
                 >
                   <Card
                     className="px-5 py-1.5 cursor-pointer transition-all hover:bg-white/10 bg-transparent relative w-full"
@@ -514,14 +514,14 @@ export default function Home() {
                       {member.discord_id && (
                         renderAvatar(memberData[member.name], !memberData[member.name]?.discord_data)
                       )}
-                      <span className="text-base font-medium flex items-center gap-1.5">
+                      <span className="text-base font-medium whitespace-nowrap">
                         {member.name}
                         {memberData[member.name]?.discord_data?.spotify && (
                           <motion.div
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.5 }}
-                            className="text-white/60"
+                            className="inline-block ml-1.5 text-white/60"
                           >
                             <svg 
                               xmlns="http://www.w3.org/2000/svg" 
@@ -536,9 +536,6 @@ export default function Home() {
                       </span>
                     </div>
                   </Card>
-                  {index < 2 && (
-                    <span className="text-white/20 text-center mx-2">•</span>
-                  )}
                 </motion.div>
               ))}
             </div>

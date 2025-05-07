@@ -22,3 +22,9 @@ bun dev
 npm run build
 npm start
 ```
+
+
+## TO DO
+- Fixup 404 PAGE
+- Clean-up files ish
+  
