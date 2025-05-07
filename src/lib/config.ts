@@ -145,9 +145,10 @@ export const members: Member[] = [
         type: "website" as const,
       },
       {
-        name: "lure.rocks",
+        name: "Tempt",
         description: "A powerful Discord bot for your community",
-        url: "https://lure.rocks",
+        url: "https://tempt.lol",
+        icon: "https://cdn.discordapp.com/avatars/1367774588750266408/a271d4855b63b329567c173cbd3557f9.png?size=1024",
         type: "website" as const,
       },
       {
