@@ -60,12 +60,6 @@ export const members: Member[] = [
     
   },
   {
-    name: "woosh",
-    link: "https://woosh.ing/",
-    discord_id: "919239894327521361",
-    github: "w8y",
-  },
-  {
     name: "body",
     link: "https://body.sh",
     discord_id: "1273083391004246080",
