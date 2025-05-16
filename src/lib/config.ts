@@ -12,7 +12,7 @@ export const members: Member[] = [
         description:
           "A custom Discord App aiming to give you better performance and improvements forked from Vesktop",
         url: "https://github.com/Equicord/Equibop",
-        icon: "https://cdn.nest.rip/uploads/631b0748-d276-4f49-ae0d-ced2b7c962c1.svg",
+        icon: "https://raw.githubusercontent.com/Equicord/Equibop/main/static/icon.png",
         type: "website" as const,
       },
       {
@@ -43,7 +43,7 @@ export const members: Member[] = [
           "A fork of Vencord, with over 300+ plugins.",
         url: "https://equicord.org",
         type: "website" as const,
-        icon: "https://cdn.nest.rip/uploads/631b0748-d276-4f49-ae0d-ced2b7c962c1.svg",
+        icon: "https://media.discordapp.net/attachments/1369744751267418316/1372735973397368943/equi.png?ex=6827db80&is=68268a00&hm=e8d74f6bb7b94111cdeb267e68656d34d2dc887f25df6914205843555e27dc91&=&format=png&quality=lossless",
       },
     ],
   },
@@ -165,7 +165,7 @@ export const members: Member[] = [
         name: "Hypixel.lol",
         description: "Private Mail-solution.",
         url: "https://hypixel.lol/",
-        icon: "https://cdn.nest.rip/uploads/a293775f-6882-4d92-94c0-aede97aee4ca.png", // fixed up logo by crxa and made one <3
+        icon: "https://media.discordapp.net/attachments/1369744751267418316/1372743786362306600/globe_1.png?ex=6827e2c7&is=68269147&hm=e30979dd77a95a354369c69e269ec5f87b354aebb40cab9fe79c5c5e04188eae&=&format=png&quality=lossless", // add logo later on - ares
         type: "website" as const,
   },
 ],
@@ -211,6 +211,11 @@ export const members: Member[] = [
     name: "bird",
     link: "#",
     discord_id: "1250561225733967938", //1095599396860723210 old userid incase of unterminated account
+  },
+  {
+    name: "shintomu",
+    link: "#",
+    discord_id: "1013953531117568051", 
   },
   {
     name: "external",
