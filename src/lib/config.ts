@@ -50,7 +50,7 @@ export const members: Member[] = [
   {
     name: "vera",
     link: "https://t.me/mumri_k",
-    discord_id: "1346505857369772085",
+    discord_id: "1334868066021933130",
   },
   {
     name: "ic3",
@@ -208,9 +208,10 @@ export const members: Member[] = [
     ],
   },
   {
-    name: "bird",
-    link: "#",
-    discord_id: "1250561225733967938", //1095599396860723210 old userid incase of unterminated account
+    name: "synth",
+    link: "https://www.synth.cx",
+    discord_id: "934393331562205195", 
+    github: "w8y",
   },
   {
     name: "shintomu",
