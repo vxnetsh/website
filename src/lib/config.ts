@@ -48,9 +48,26 @@ export const members: Member[] = [
     ],
   },
   {
-    name: "vera",
-    link: "https://t.me/mumri_k",
-    discord_id: "1334868066021933130",
+    name: "vmohammad",
+    link: "https://vmohammad.dev/",
+    discord_id: "840854894881538079",
+    github: "vMohammad24",
+    projects: [
+      {
+        name: "nest.rip",
+        description: "nest.rip is your secure place to store files",
+        url: "https://nest.rip/",
+        icon: "https://nest.rip/logo.png",
+        type: "website" as const,
+      },
+      {
+        name: "NaviThingy",
+        description: "A Navidrome client built with Tauri and Svelte.",
+        url: "https://github.com/vMohammad24/NaviThingy/",
+        icon: "https://raw.githubusercontent.com/vMohammad24/NaviThingy/refs/heads/main/static/logo.svg",
+        type: "website" as const,
+      },
+    ],
   },
   {
     name: "ic3",
@@ -62,7 +79,7 @@ export const members: Member[] = [
   {
     name: "body",
     link: "https://body.sh",
-    discord_id: "1273083391004246080",
+    discord_id: "1303758145746767924",
     github: "Body-Alhoha",
     projects: [
       {
