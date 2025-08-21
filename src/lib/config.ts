@@ -190,7 +190,7 @@ export const members: Member[] = [
   {
     name: "cyp",
     link: "https://privm.net/",
-    discord_id: "667148181506883584",
+    discord_id: "195066212152115211",
     github: "cypdev",
     projects: [
       {
