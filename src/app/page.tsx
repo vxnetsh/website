@@ -18,9 +18,11 @@ import {
 } from "@/lib/lanyard";
 import type { Member, Project } from "@/types/member";
 import dynamic from 'next/dynamic';
+import type { ComponentType } from "react";
 import music from "@/lib/music.json"
 
 const Player = dynamic(() => import('lottie-react'), { ssr: false });
+const LottiePlayer = Player as unknown as ComponentType<any>;
 
 type ExtendedActivity = Activity & {
   application_id?: string;
@@ -582,15 +584,15 @@ export default function Home() {
                           }}
                           className="text-white/60 overflow-hidden"
                         >
-                          <Player
+                          <LottiePlayer // should fix the issue with Lottieplayer - twentyfifteen
                             autoplay
                             loop
                             animationData={music}
-                            style={{ width: 15, height: 15 }}
-                            rendererSettings={{
-                              preserveAspectRatio: "xMidYMid slice",
-                            }}
-                          />
+                              style={{ width: 15, height: 15 }}
+                              rendererSettings={{
+                                preserveAspectRatio: "xMidYMid slice",
+                              }}
+                            />
                         </motion.div>
                       </span>
                     </div>
@@ -609,7 +611,7 @@ export default function Home() {
 
         <Dialog
           open={!!selectedMember}
-          onOpenChange={(open) => !open && setSelectedMember(null)}
+          onOpenChange={(open: boolean) => !open && setSelectedMember(null)} // was just to remove this error was pissing me off - twentyfifteen
         >
           <DialogContent className="max-w-[90vw] sm:max-w-md bg-background">
             <motion.div

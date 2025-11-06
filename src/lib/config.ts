@@ -1,5 +1,5 @@
 import type { Member } from "@/types/member";
-
+// SORT YOUR FUCKING CONFIG FILE BY NAME ALPHABETICALLY, this is the most disorganized file in the entire codebase. thanks 06/11/25 - twentyfifteen
 export const members: Member[] = [
   {
     name: "cortex",
@@ -43,7 +43,7 @@ export const members: Member[] = [
           "A fork of Vencord, with over 300+ plugins.",
         url: "https://equicord.org",
         type: "website" as const,
-        icon: "https://media.discordapp.net/attachments/1369744751267418316/1372735973397368943/equi.png?ex=6827db80&is=68268a00&hm=e8d74f6bb7b94111cdeb267e68656d34d2dc887f25df6914205843555e27dc91&=&format=png&quality=lossless",
+        icon: "https://raw.githubusercontent.com/Equicord/Equibop/main/static/icon.png", // stop using fucking discord cdn as file host this bs breaks so often, thanks 06/11/25 - twentyfifteen
       },
     ],
   },
@@ -83,23 +83,25 @@ export const members: Member[] = [
         description:
           "Stellar Tweaks is an upcoming free and opensource modification for Lunar Client which allows modding, customizing Lunar Client features and much more",
         url: "https://github.com/StellarTweaks",
-        icon: "https://cdn.discordapp.com/icons/1330204720014426122/aa45672764ca374d665fa4a2c291a96e.png?size=128",
+        icon: "https://avatars.githubusercontent.com/u/195576848", // again stop using discord cdn as file host use github or something else, thanks 06/11/25 - twentyfifteen
         type: "github" as const,
       },
       {
         name: "Turnaround",
         description:
           "Turnaround was a free and opensource solver for Cloudfare's turnstile",
+        icon: "https://logos-world.net/wp-content/uploads/2022/04/Cloudflare-Emblem.png",
         url: "https://github.com/Body-Alhoha/turnaround",
         type: "github" as const,
       },
-      {
-        name: "Remake",
-        description:
-          "Remake is a free and opensource library to modify Java classes at runtime, without the need of any java agent",
-        url: "https://github.com/StellarTweaks/Remake",
-        type: "github" as const,
-      },
+      // This is legit just fucking stellar tweaks again ??? who approved this bs, sometimes brain cells just dont work, - twentyfifteen
+      // {
+      //   name: "Remake",
+      //   description:
+      //     "Remake is a free and opensource library to modify Java classes at runtime, without the need of any java agent",
+      //   url: "https://github.com/StellarTweaks/Remake",
+      //   type: "github" as const,
+      // },
     ],
   },
   {
@@ -136,21 +138,23 @@ export const members: Member[] = [
         icon: "https://r2.evict.bot/evict-marketing.png",
         type: "website" as const,
       },
-      {
-        name: "Tempt",
-        description: "A powerful Discord bot for your community",
-        url: "https://tempt.lol",
-        icon: "https://cdn.discordapp.com/avatars/1367774588750266408/a271d4855b63b329567c173cbd3557f9.png?size=1024",
-        type: "website" as const,
-      },
-      {
-        name: "emogir.ls",
-        description:
-          "A premium solution for e-mails, image uploading & showing off your digital portfolio.",
-        url: "https://emogir.ls",
-        icon: "https://cdn.discordapp.com/icons/1342461398390673510/9fe83c2624090277777128505ac1bd53.png",
-        type: "website" as const,
-      },
+      // dead site - twentyfifteen
+      // {
+      //   name: "Tempt",
+      //   description: "A powerful Discord bot for your community",
+      //   url: "https://tempt.lol",
+      //   icon: "https://cdn.discordapp.com/avatars/1367774588750266408/a271d4855b63b329567c173cbd3557f9.png?size=1024",
+      //   type: "website" as const,
+      // },
+      // STOP USING DISCORD CDN AS FILE HOST FFS, and this is commtented out anyway bcs it linkes to fucking evict.bot / greed site - twentyfifteen
+      // {
+      //   name: "emogir.ls",
+      //   description:
+      //     "A premium solution for e-mails, image uploading & showing off your digital portfolio.",
+      //   url: "https://emogir.ls",
+      //   icon: "https://cdn.discordapp.com/icons/1342461398390673510/9fe83c2624090277777128505ac1bd53.png",
+      //   type: "website" as const,
+      // },
     ],
   },
   {
@@ -158,15 +162,16 @@ export const members: Member[] = [
     link: "https://hypixel.lol/",
     discord_id: "657587508837613580", // 1235921714425106493 seconds UserID incase 
     github: "euro-pol",
-    projects: [
-      {
-        name: "Hypixel.lol",
-        description: "Private Mail-solution.",
-        url: "https://hypixel.lol/",
-        icon: "https://media.discordapp.net/attachments/1369744751267418316/1372743786362306600/globe_1.png?ex=6827e2c7&is=68269147&hm=e30979dd77a95a354369c69e269ec5f87b354aebb40cab9fe79c5c5e04188eae&=&format=png&quality=lossless", // add logo later on - ares
-        type: "website" as const,
-  },
-],
+    // dead or not working site - twentyfifteen
+//     projects: [
+//       {
+//         name: "Hypixel.lol",
+//         description: "Private Mail-solution.",
+//         url: "https://hypixel.lol/",
+//         icon: "https://media.discordapp.net/attachments/1369744751267418316/1372743786362306600/globe_1.png?ex=6827e2c7&is=68269147&hm=e30979dd77a95a354369c69e269ec5f87b354aebb40cab9fe79c5c5e04188eae&=&format=png&quality=lossless", // add logo later on - ares
+//         type: "website" as const,
+//   },
+// ],
   },
   {
     name: "cyp",
@@ -181,6 +186,13 @@ export const members: Member[] = [
         icon: "https://privm.net/storage/logo.webp",
         type: "website" as const,
       },
+      {
+        name: "Restorio", // - twentyfifteen
+        description: "N/A",
+        url: "https://restorio.net/",
+        icon: "https://restorio.net/restorio.ico",
+        type: "website" as const,
+      }
     ],
   },
   {
@@ -200,7 +212,7 @@ export const members: Member[] = [
         name: "MailHaven",
         description: "Your privacy matters. That’s why we created MailHaven, a free secure and privacy-respected email service designed for you.",
         url: "https://mailhaven.su",
-        icon: "https://cdn.nest.rip/uploads/68dd7dca-4d81-4313-b511-7cd6e4695139.jpg",
+        icon: "https://mailhaven.su/logo.png", // stop using discord cdn as file host or dead links to some file host - twentyfifteen
         type: "website" as const,
       }
     ],
@@ -224,16 +236,17 @@ export const members: Member[] = [
     name: "compile",
     link: "https://tempt.lol",
     discord_id: "659438962624167957",
-    projects: [
-      {
-        name: "Tempt",
-        description:
-          "A powerful Discord bot for your community, with a focus on performance and reliability.",
-        url: "https://tempt.lol",
-        icon: "https://cdn.discordapp.com/avatars/1367774588750266408/a271d4855b63b329567c173cbd3557f9.png?size=1024",
-        type: "website" as const,
-      },
-    ],
+    // dead site / project - twentyfifteen
+    // projects: [
+    //   {
+    //     name: "Tempt",
+    //     description:
+    //       "A powerful Discord bot for your community, with a focus on performance and reliability.",
+    //     url: "https://tempt.lol",
+    //     icon: "https://cdn.discordapp.com/avatars/1367774588750266408/a271d4855b63b329567c173cbd3557f9.png?size=1024", // stop using discord cdn as file host - twentyfifteen
+    //     type: "website" as const,
+    //   },
+    // ],
   }
  
 ].sort((a, b) => {
